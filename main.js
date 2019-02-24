@@ -5,7 +5,7 @@ var maxCreeps = 10;
 var roleHarvester = require('harvester');
 var roleUpgrader = require('upgrader');
 var roleBuilder = require('builder');
-
+var roleRepairer = require('repairer');
 var creepFactory = require('creepfactory');
 
 module.exports.loop = function() {
@@ -35,6 +35,9 @@ module.exports.loop = function() {
         else if (creep.memory.job == "builder") {
             roleBuilder.run(creep);
         }
+        else if (creep.memory.job == "repairer") {
+            roleRepairer.run(creep);
+        }
     }
 
     // If we don't have the max amount of creeps, spawn one.
@@ -44,7 +47,7 @@ module.exports.loop = function() {
 }
 
 function spawnCreep() {
-    if(Game.spawns.Spawn1.createCreep([MOVE, CARRY, WORK]) >= 0){
+    if(Game.spawns.Spawn1.createCreep([MOVE, MOVE, CARRY, WORK, WORK]) >= 0){
             console.log("Spawning creep");
     }
 }

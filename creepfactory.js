@@ -2,7 +2,7 @@
 var creepFactory = {
   maxHarvesters: 6,
   maxUpgraders: 2,
-  maxBuilder: 2,
+  maxBuilder: 1,
 
   harvesters: 0,
   builders: 0,
@@ -43,6 +43,11 @@ var creepFactory = {
             this.upgraders++;
             break;
           case "builder":
+            if (this.builders >= this.maxBuilder) {
+              Memory.creeps[creep].job = "repairer";
+              break;
+            }
+
             this.builders++;
             break;
         }

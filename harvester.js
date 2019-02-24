@@ -4,7 +4,7 @@ var roleHarvester = {
         memoryManagement(creep);
 
         if (creep.memory.working) {
-            let target = Game.spawns.Spawn1.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
+            let target = new RoomPosition(15,11,"W7N7").findClosestByRange(FIND_SOURCES_ACTIVE);
             if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
             }
@@ -18,6 +18,13 @@ var roleHarvester = {
             if (targets.length > 0) {
                 if (creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
+                }
+            } else {
+                let target = Game.spawns.Spawn1.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+                if (target) {
+                    if (creep.build(target) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target);
+                    }
                 }
             }
         }
